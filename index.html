@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teddy Day 🧸</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background: #f6efe8;
+  font-family: 'Dancing Script', cursive;
+  color: #3b2a23;
+  overflow-x: hidden;
+}
+
+/* OPENING SCREEN */
+.opening-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.opening-screen .teddy-big {
+  font-size: 90px;
+  margin-bottom: 20px;
+}
+
+.opening-screen p {
+  font-size: 1.5rem;
+  opacity: 0.85;
+}
+
+/* MAIN CONTENT */
+.container {
+  max-width: 820px;
+  margin: auto;
+  padding: 90px 25px 120px;
+  display: none;
+}
+
+.section {
+  font-size: 1.6rem;
+  line-height: 2;
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.6s ease;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ending {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 100px;
+}
+
+.gift {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.gift img {
+  max-width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+/* FLOATING TEDDIES */
+.teddy {
+  position: fixed;
+  top: -10%;
+  font-size: 26px;
+  opacity: 0.35;
+  animation: teddyFall linear infinite;
+  pointer-events: none;
+}
+
+@keyframes teddyFall {
+  to {
+    transform: translateY(120vh);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPENING -->
+<div class="opening-screen" id="start">
+  <div class="teddy-big">🧸</div>
+  <p>This is for the moments when you miss me.<br>Tap the teddy.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="container" id="content">
+
+  <div class="section reveal">
+    When you feel tired, overwhelmed, or quiet,  
+    I hope this reminds you that you are never alone.  
+    My love wraps around you even in the smallest moments.
+  </div>
+
+  <div class="section reveal">
+    Even when I’m not beside you,  
+    <strong>my love is never-ending, evergreen, and always there for you.</strong>  
+    Steady. Certain. Unchanging.
+  </div>
+
+  <div class="section reveal">
+    If you ever need something to hold,  
+    imagine it’s me holding you back —  
+    reminding you that you are safe and deeply loved.
+  </div>
+
+  <div class="section reveal">
+    I’ll always be your place of comfort,  
+    the warmth you return to,  
+    the calm that stays.
+  </div>
+
+  <div class="ending reveal">
+    <p><strong>Here’s your gift, my wife 🧸</strong></p>
+  </div>
+
+  <div class="gift reveal">
+    <img src="teddy.jpg" alt="Teddy for you">
+  </div>
+
+</div>
+
+<script>
+/* OPEN LETTER */
+document.getElementById("start").onclick = () => {
+  document.getElementById("start").style.display = "none";
+  document.getElementById("content").style.display = "block";
+  revealOnScroll();
+};
+
+/* REVEAL ON SCROLL */
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  reveals.forEach(el => {
+    const windowHeight = window.innerHeight;
+    const elementTop = el.getBoundingClientRect().top;
+    if (elementTop < windowHeight - 120) {
+      el.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+
+/* FLOATING TEDDIES */
+function createTeddy() {
+  const teddy = document.createElement("div");
+  teddy.classList.add("teddy");
+  teddy.innerText = "🧸";
+  teddy.style.left = Math.random() * 100 + "vw";
+  teddy.style.animationDuration = (18 + Math.random() * 12) + "s";
+  document.body.appendChild(teddy);
+  setTimeout(() => teddy.remove(), 30000);
+}
+
+setInterval(createTeddy, 2200);
+</script>
+
+</body>
+</html>
